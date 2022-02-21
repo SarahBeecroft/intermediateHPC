@@ -17,19 +17,12 @@ keypoints:
 
 ### Access to directories in the host machine
 
-Let's start and `cd` into the root exercises directory:
-
-```
-$ cd $TUTO
-```
-{: .bash}
-
 What directories can we access from the container?
 
 First, let us assess what the content of the root directory `/` looks like from outside *vs* inside the container, to highlight the fact that a container runs on his own filesystem:
 
 ```
-$ ls /
+ls /
 ```
 {: .bash}
 
@@ -42,7 +35,7 @@ askapbuffer  bin   dev  group  lib    media  opt     proc  run   scratch  srv  t
 Now let's look at the root directory when we're in the container
 
 ```
-$ singularity exec docker://ubuntu:18.04 ls /
+singularity exec docker://ubuntu:16.04 ls /
 ```
 {: .bash}
 
@@ -57,12 +50,12 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > For reference, let's check the host first:
 >
 > ```
-> $ pwd
+> pwd
 > ```
 > {: .bash}
 >
 > ```
-> /home/ubuntu/singularity-containers/demos
+> /scratch/pawsey0001/sbeecroft/intermediateHPC/exercises/intro_singularity
 > ```
 > {: .output}
 >
@@ -71,16 +64,16 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 pwd
+> > singularity exec docker://ubuntu:16.04 pwd
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > /home/ubuntu/singularity-containers/demos
+> > /scratch/pawsey0001/sbeecroft/intermediateHPC/exercises/intro_singularity
 > > ```
 > > {: .output}
 > >
-> > Host and container working directories coincide!
+> > Host and container working directories match!
 > {: .solution}
 {: .challenge}
 
@@ -92,47 +85,18 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 ls
+> > singularity exec docker://ubuntu:16.04 ls
 > > ```
 > > {: .bash}
 > >
 > > ```
-> > blast  blast_db  gromacs  lolcow  lolcow_docker  lolcow_hpccm  nextflow  openfoam  pull_big_images.sh  python  rstudio	singularity  trinity
+> > python_3-slim.sif  sbatch_pull_big_images.sh  sif_lib  ubuntu_16.04.sif
 > > ```
 > > {: .output}
 > >
 > > Indeed we can!
 > {: .solution}
 {: .challenge}
-
-
-> ## How about other directories in the host?
->
-> For instance, let us inspect `$TUTO/_episodes`.
->
-> > ## Solution
-> >
-> > ```
-> > $ singularity exec docker://ubuntu:18.04 ls $TUTO/_episodes
-> > ```
-> > {: .bash}
-> >
-> > ```
-> > ls: cannot access '/home/ubuntu/singularity-containers/_episodes': No such file or directory
-> > ```
-> > {: .output}
-> >
-> > Host directories external to the current directory are not visible!  How can we fix this?  Read on...
-> {: .solution}
-{: .challenge}
-
-
-> ## What happens on Pawsey HPC systems?
-> 
-> This last example won't work as expected on Zeus, Magnus and other Pawsey HPC machines.  
-> This is due to site defaults that are meant to make users' life easier. In particular, `/group` and `/scratch` get bind mounted by default.  
-> If you want to experience this example on Pawsey HPC, you should first `unset SINGULARITY_BINDPATH`.
-{: .callout}
 
 
 > ## And by the way, can we write inside a container?
@@ -142,7 +106,7 @@ bin  boot  data  dev  environment  etc	home  lib  lib64  media  mnt  opt  proc  
 > > ## Solution
 > > 
 > > ```
-> > $ singularity exec docker://ubuntu:18.04 touch /example
+> > singularity exec docker://ubuntu:16.04 touch /example
 > > ```
 > > {: .bash}
 > > 
@@ -169,24 +133,20 @@ There is also a short syntax, that just mounts the dir using the same name and p
 Let's use the latter syntax to mount `$TUTO` into the container and re-run `ls`.
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:18.04 ls $TUTO/_episodes
+singularity exec -B $TUTO docker://ubuntu:16.04 ls $TUTO/../_episodes
 ```
 {: .bash}
 
 ```
-11-containers-intro.md  22-build-docker.md      33-gpu-gromacs.md       45-docker.md
-12-singularity-intro.md 23-web-rstudio.md       41-workflow-engines.md  46-compose-web.md
-13-bio-example-host.md  24-ml-python.md         42-x11-gnuplot.md       47-other-tools.md
-14-build-intro.md       31-mpi-openfoam.md      43-wrappers.md
-21-build-deffile.md     32-writable-trinity.md  44-setup-singularity.md
+11-zeus_login.md  12-singularity-intro.md  13-bio-example-host.md  14-break.md	21-blast.md  22-workflow-engines.md  31-break.md
 ```
 {: .output}
 
 Also, we can write files in a host dir which has been bind mounted in the container:
 
 ```
-$ singularity exec -B $TUTO docker://ubuntu:18.04 touch $TUTO/_episodes/example
-$ singularity exec -B $TUTO docker://ubuntu:18.04 ls $TUTO/_episodes/example
+singularity exec -B $TUTO docker://ubuntu:16.04 touch $TUTO/../_episodes/example
+singularity exec -B $TUTO docker://ubuntu:16.04 ls $TUTO/../_episodes/example
 ```
 {: .bash}
 
@@ -207,7 +167,7 @@ If you need to mount multiple directories, you can either repeat the `-B` flag m
 Also, if you want to keep the runtime command compact, you can equivalently specify directories to be bind mounted using the environment variable `SINGULARITY_BINDPATH`:
 
 ```
-$ export SINGULARITY_BINDPATH="dir1,dir2,dir3"
+export SINGULARITY_BINDPATH="dir1,dir2,dir3"
 ```
 {: .bash}
 
@@ -217,8 +177,8 @@ $ export SINGULARITY_BINDPATH="dir1,dir2,dir3"
 By default, shell variables are inherited in the container from the host:
 
 ```
-$ export HELLO=world
-$ singularity exec docker://ubuntu:18.04 bash -c 'echo $HELLO'
+export HELLO=world
+singularity exec docker://ubuntu:16.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -231,8 +191,8 @@ There might be situations where you want to isolate the shell environment of the
 (Note that this will also isolate system directories such as `/tmp`, `/dev` and `/run`)
 
 ```
-$ export HELLO=world
-$ singularity exec -C docker://ubuntu:18.04 bash -c 'echo $HELLO'
+export HELLO=world
+singularity exec -C docker://ubuntu:16.04 bash -c 'echo $HELLO'
 ```
 {: .bash}
 
@@ -244,8 +204,8 @@ $ singularity exec -C docker://ubuntu:18.04 bash -c 'echo $HELLO'
 If you need to pass only specific variables to the container, that might or might not be defined in the host, you can define variables that start with `SINGULARITYENV_`; this prefix will be automatically trimmed in the container:
 
 ```
-$ export SINGULARITYENV_CIAO=mondo
-$ singularity exec -C docker://ubuntu:18.04 bash -c 'echo $CIAO'
+export SINGULARITYENV_CIAO=mondo
+singularity exec -C docker://ubuntu:16.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 
@@ -257,7 +217,7 @@ mondo
 From Singularity 3.6.x on, there's an alternative way to define variables that are specific to the container, using the flag `--env`:
 
 ```
-$ singularity exec --env CIAO=mondo docker://ubuntu:18.04 bash -c 'echo $CIAO'
+singularity exec --env CIAO=mondo docker://ubuntu:16.04 bash -c 'echo $CIAO'
 ```
 {: .bash}
 

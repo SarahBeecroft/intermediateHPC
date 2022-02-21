@@ -18,11 +18,10 @@ keypoints:
 
 
 ### Get ready for the hands-on
-We will `cd` into the directory for this part of the tutorial and load the singularity module.
+We will `cd` into the directory for this part of the tutorial.
 
 ```
 cd $TUTO/intro_singularity
-module load singularity
 ```
 {: .bash}
 
@@ -49,6 +48,7 @@ module load singularity
 >
 > ```
 > salloc -n 1 -t 4:00:00
+> module load singularity
 > ```
 > {: .bash}
 >
@@ -114,6 +114,7 @@ singularity exec library://library/default/ubuntu:16.04 echo "Hello World"
 {: .bash}
 
 ```
+INFO:    Using cached image
 Hello World
 ```
 {: .output}
@@ -258,14 +259,14 @@ You can specify the storage location with the `--dir` flag:
 
 ```
 mkdir -p sif_lib
-singularity pull --dir ~/path/to/sif/lib docker://library/ubuntu:16.04
+singularity pull --dir sif_lib docker://library/ubuntu:16.04
 ```
 {: .bash}
 
 Being able to specify download locations allows you to keep the local set of images organised and tidy, by making use of a directory tree.  It also allows for easy sharing of images within your team in a shared resource.  In general, you will need to specify the location of the image upon execution, *e.g.* by defining a dedicated variable:
 
 ```
-export image="~/path/to/sif/lib/ubuntu_16.04.sif"
+export image="sif_lib/ubuntu_16.04.sif"
 singularity exec $image echo "Hello Again"
 ```
 {: .bash}
@@ -361,7 +362,7 @@ Bioinformaticians should keep in mind the container registry [Red Hat Quay](http
 > > {: .bash}
 > >
 > > ```
-> > Python 3.8.0
+> > Python 3.10.2
 > > ```
 > > {: .output}
 > {: .solution}
