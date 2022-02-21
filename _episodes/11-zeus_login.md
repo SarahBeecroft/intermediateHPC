@@ -1,20 +1,28 @@
 ---
-title: "Logging on to the server"
+title: "Logging on to Zeus"
 teaching: 5
 exercises: 10
 questions:
 objectives:
-- Get setup on the server
+- Learn how to remote access Zeus
+keypoints:
+- Logging on to Pawsey systems uses SSH (secure shell)
 ---
 
-### Logging on to the server
-Your user name (s-NUMBER) and password will be supplied, along with the IP address of the server. Within a terminal window, use the ssh command to connect. 
+### Logging on to Zeus
+Your user name and password will be supplied. Within a terminal window, type:
 
 ```bash
-ssh s-NUMBER@146.XXX.XX.XX
+ssh username@zeus.pawsey.org.au
 ```
 
 Enter your password when prompted. If asked to accept any credentials, type `yes` and hit enter
+
+If you have successfully logged in, you should see your command prompt change
+
+```output
+username@zeus-1:~>
+```
 
 If you are unable to login, please first check your password was typed correctly. If you are still unable to login, please ask for assistance.
 
@@ -23,8 +31,10 @@ If you are unable to login, please first check your password was typed correctly
 There are some materials for the lessons which are hosted on github. In order to access those on Zeus, you will need to clone the git repo, then change directory. You can list the contents of the directory with `ls`
 
 ```bash
-cd /mnt/s-ws/s-NUMBER
+cd $MYSCRATCH
 git clone https://github.com/SarahBeecroft/intermediateHPC.git
-cd intermediateHPC/exercises
+cd intermediateHPC
+ls
+cd exercises
 ls
 ```
