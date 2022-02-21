@@ -28,11 +28,12 @@ If you are unable to login, please first check your password was typed correctly
 
 
 ### Downloading the lesson material
-There are some materials for the lessons which are hosted on github. In order to access those on Zeus, you will need to clone the git repo, then change directory. You can list the contents of the directory with `ls`
+There are some materials for the lessons which are hosted on github. In order to access those on Zeus, you will need to clone the git repo, then change directory. You can list the contents of the directory with `ls`. Save the current directory into a variable named `TUTO` for later use.
 
 ```bash
 cd $MYSCRATCH
 git clone https://github.com/SarahBeecroft/intermediateHPC.git
 cd intermediateHPC/exercises
 ls
+export TUTO=$(pwd)
 ```

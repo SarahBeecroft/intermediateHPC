@@ -17,7 +17,7 @@ keypoints:
 
 ### Access to directories in the host machine
 
-Let's start and `cd` into the root demo directory:
+Let's start and `cd` into the root exercises directory:
 
 ```
 $ cd $TUTO
@@ -34,7 +34,7 @@ $ ls /
 {: .bash}
 
 ```
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  scratch  shared  srv  sys  tmp  usr  var
+askapbuffer  bin   dev  group  lib    media  opt     proc  run   scratch  srv  tempddn  usr  xcatpost astro boot  etc  home   lib64  mnt    pawsey  root  sbin  selinux  sys  tmp      var
 ```
 {: .output}
 

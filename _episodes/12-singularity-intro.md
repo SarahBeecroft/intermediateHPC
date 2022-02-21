@@ -18,14 +18,10 @@ keypoints:
 
 
 ### Get ready for the hands-on
-
-Before we start, let us ensure we have got the required files to run the tutorials.
-
-If you haven't done it already, download the following Github repo.  Then `cd` into it, and save the current directory into a variable named `TUTO` for later use.
+We will `cd` into the directory for this part of the tutorial and load the singularity module.
 
 ```
-cd intro_singularity
-export TUTO=$(pwd)
+cd $TUTO/intro_singularity
 module load singularity
 ```
 {: .bash}
@@ -52,7 +48,7 @@ module load singularity
 > If you're running this tutorial on a shared system (*e.g.* on Zeus or Magnus at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
 >
 > ```
-> $ salloc -n 1 -t 4:00:00
+> salloc -n 1 -t 4:00:00
 > ```
 > {: .bash}
 >
@@ -72,7 +68,7 @@ For these first exercises, we're going to use a plain *Ubuntu* container image. 
 Running a command is done by means of `singularity exec`:
 
 ```
-$ singularity exec library://ubuntu:16.04 cat /etc/os-release
+singularity exec library://ubuntu:16.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -113,7 +109,7 @@ Here Singularity pulled the image from an online image registry, as represented 
 In the example above we didn't specify the **user**, `library`, and the **project**, `default`.  Why?  Because the specific case of `library/default/` can be omitted.  The full specification is used in the next example:
 
 ```
-$ singularity exec library://library/default/ubuntu:16.04 echo "Hello World"
+singularity exec library://library/default/ubuntu:16.04 echo "Hello World"
 ```
 {: .bash}
 
@@ -131,7 +127,7 @@ Singularity is able to download and run Docker images as well.
 Let's try and download a Ubuntu container from the [**Docker Hub**](https://hub.docker.com), *i.e.* the main registry for Docker containers:
 
 ```
-$ singularity exec docker://ubuntu:16.04 cat /etc/os-release
+singularity exec docker://ubuntu:16.04 cat /etc/os-release
 ```
 {: .bash}
 
@@ -185,7 +181,7 @@ Docker Hub organises images only by users (also called *repositories*), not by p
 > > ## Solution
 > >
 > > ```
-> > $ singularity exec docker://ubuntu cat /etc/os-release
+> > singularity exec docker://ubuntu cat /etc/os-release
 > > ```
 > > {: .bash}
 > >
@@ -209,7 +205,7 @@ Sometimes it can be useful to open a shell inside a container, rather than to ex
 Achieve this by using `singularity shell`:
 
 ```
-$ singularity shell docker://ubuntu:16.04
+singularity shell docker://ubuntu:16.04
 ```
 {: .bash}
 
@@ -230,14 +226,14 @@ An alternative option to handle images is to download them to a known location, 
 Let's use `singularity pull` to save the image to a specified path (output might differ depending on the Singularity version you use):
 
 ```
-$ singularity pull docker://ubuntu:16.04
+singularity pull docker://ubuntu:16.04
 ```
 {: .bash}
 
 By default, the image is saved in the current directory:
 
 ```
-$ ls
+ls
 ```
 {: .bash}
 
@@ -249,7 +245,7 @@ ubuntu_16.04.sif
 Then you can use this image file by:
 
 ```
-$ singularity exec ./ubuntu_16.04.sif echo "Hello World"
+singularity exec ./ubuntu_16.04.sif echo "Hello World"
 ```
 {: .bash}
 
@@ -261,16 +257,16 @@ Hello World
 You can specify the storage location with the `--dir` flag:
 
 ```
-$ mkdir -p sif_lib
-$ singularity pull --dir ~/path/to/sif/lib docker://library/ubuntu:16.04
+mkdir -p sif_lib
+singularity pull --dir ~/path/to/sif/lib docker://library/ubuntu:16.04
 ```
 {: .bash}
 
 Being able to specify download locations allows you to keep the local set of images organised and tidy, by making use of a directory tree.  It also allows for easy sharing of images within your team in a shared resource.  In general, you will need to specify the location of the image upon execution, *e.g.* by defining a dedicated variable:
 
 ```
-$ export image="~/path/to/sif/lib/ubuntu_16.04.sif"
-$ singularity exec $image echo "Hello Again"
+export image="~/path/to/sif/lib/ubuntu_16.04.sif"
+singularity exec $image echo "Hello Again"
 ```
 {: .bash}
 
@@ -289,7 +285,7 @@ The default directory location for the image cache is `$HOME/.singularity/cache`
 If you are running out of disk space, you can inspect the cache with this command (omit `-v` before Singularity version 3.4):
 
 ```
-$ singularity cache list -v
+singularity cache list -v
 ```
 {: .bash}
 
@@ -313,7 +309,7 @@ Total space used: 146.49 MB
 we are not going to clean the cache in this tutorial, as cached images will turn out useful later on.  Let us just perform a dry-run using the `-n` option:
 
 ```
-$ singularity cache clean -n
+singularity cache clean -n
 ```
 {: .bash}
 
@@ -353,14 +349,14 @@ Bioinformaticians should keep in mind the container registry [Red Hat Quay](http
 > > Pull:
 > >
 > > ```
-> > $ singularity pull docker://python:3-slim
+> > singularity pull docker://python:3-slim
 > > ```
 > > {: .bash}
 > >
 > > Get Python version:
 > >
 > > ```
-> > $ singularity exec ./python_3-slim.sif python --version
+> > singularity exec ./python_3-slim.sif python --version
 > > ```
 > > {: .bash}
 > >
