@@ -24,8 +24,9 @@ Before we start, let us ensure we have got the required files to run the tutoria
 If you haven't done it already, download the following Github repo.  Then `cd` into it, and save the current directory into a variable named `TUTO` for later use.
 
 ```
-cd singularity
+cd intro_singularity
 export TUTO=$(pwd)
+module load singularity
 ```
 {: .bash}
 
@@ -36,8 +37,7 @@ export TUTO=$(pwd)
 > > Open a second terminal in the machine where you're running the tutorial then run the following commands to start downloading a few images that you'll require later:
 > >
 > > ```
-> > $ cd $TUTO/demos
-> > $ sbatch ./sbatch_pull_big_images.sh
+> > sbatch ./sbatch_pull_big_images.sh
 > > ```
 > > {: .bash}
 > >
@@ -68,11 +68,6 @@ export TUTO=$(pwd)
 ### Executing a simple command in a Singularity container
 
 For these first exercises, we're going to use a plain *Ubuntu* container image.  It's small and quick to download, and will allow use to get to know how containers work by using common Linux commands.  
-
-```
-$ cd $TUTO
-```
-{: .bash}
 
 Running a command is done by means of `singularity exec`:
 

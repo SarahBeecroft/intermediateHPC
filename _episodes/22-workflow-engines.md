@@ -6,7 +6,6 @@ questions:
 objectives:
 - Get an idea of the interplay between containers and workflow engines
 keypoints:
-- Some workflow engines offer transparent APIs for running containerised applications
 - If you need to run data analysis pipelines, the combination of containers and workflow engines can really make your life easier!
 ---
 
@@ -22,7 +21,7 @@ Now, let's try and use Singularity and Nextflow to run a demo RNA sequencing pip
 
 ### Install Nextflow
 
-First, if it's not already on your system, you'll need to install Nextflow.  You'll need to install a Java runtime and download the Nextflow executable.  It will take a few minutes to download all of the required dependencies, but the process is fairly automated.  This is a template install [script]({{ page.root }}/files/install-nextflow.sh) for a Linux box.
+First, if it's not already on your system, you'll need to install Nextflow.  You'll need to install a Java runtime and download the Nextflow executable. It will take a few minutes to download all of the required dependencies, but the process is fairly automated.  This is a template install [script]({{ page.root }}/files/install-nextflow.sh) for a Linux box.
 
 If you're running on the Pawsey Nimbus cloud, just run the above script via: `bash $TUTO/files/install-nextflow.sh`.
 
@@ -34,7 +33,7 @@ If you're running at Pawsey *e.g.* on Zeus, all you need is to `module load next
 Let's `cd` into the appropriate directory:
 
 ```
-$ cd $TUTO/demos/nextflow
+$ cd intermediateHPC/exercises/nextflow
 ```
 {: .bash}
 

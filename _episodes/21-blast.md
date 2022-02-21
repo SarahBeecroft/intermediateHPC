@@ -1,5 +1,5 @@
 ---
-title: "Breakout Room 1: use BLAST from a container"
+title: "Using BLAST from a container"
 teaching: 0
 exercises: 20
 questions:
@@ -15,13 +15,13 @@ keypoints:
 
 ### Goal
 
-In this first breakout room, you're going to lookup for a BLAST container image, download it, test it, and finally use it to run a quick blasting.  
+You're going to find for a BLAST container image, download it, test it, and finally use it to run a quick blasting.  
 This example is adapted from the [BioContainers documentation](http://biocontainers-edu.biocontainers.pro/en/latest/running_example.html).
 
 Before you start, `cd` into the appropriate directory:
 
 ```bash
-cd /data/bio-intro-containers/exercises/blast_1
+cd intermediateHPC/exercises/blast_singularity
 ```
 
 
@@ -100,7 +100,7 @@ cd /data/bio-intro-containers/exercises/blast_1
 {: .challenge}
 
 
-Now, the demo directory `exercises/blast_1` contains a human prion FASTA sequence, `P04156.fasta`, as well as a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`.  Let us uncompress the database first:
+The demo directory `exercises/blast_singularity` contains a human prion FASTA sequence, `P04156.fasta`, as well as a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`.  Let us uncompress the database first:
 
 ```bash
 gunzip zebrafish.1.protein.faa.gz
