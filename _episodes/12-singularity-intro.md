@@ -24,10 +24,8 @@ Before we start, let us ensure we have got the required files to run the tutoria
 If you haven't done it already, download the following Github repo.  Then `cd` into it, and save the current directory into a variable named `TUTO` for later use.
 
 ```
-$ cd ~
-$ git clone https://github.com/PawseySC/singularity-containers
-$ cd singularity-containers
-$ export TUTO=$(pwd)
+cd singularity
+export TUTO=$(pwd)
 ```
 {: .bash}
 
@@ -35,15 +33,7 @@ $ export TUTO=$(pwd)
 > ## Want to save time later in the tutorial?
 >
 > > ## Read this
-> > Open a second terminal in the machine where you're running the tutorial, then run the script `pull_big_images.sh` to start downloading a few images that you'll require later:
-> >
-> > ```
-> > $ cd $TUTO/demos
-> > $ nohup bash ./pull_big_images.sh &
-> > ```
-> > {: .bash}
-> >
-> > **In alternative**, if you are running at Pawsey, *e.g.* on Zeus, submit this other script with Slurm instead:
+> > Open a second terminal in the machine where you're running the tutorial then run the following commands to start downloading a few images that you'll require later:
 > >
 > > ```
 > > $ cd $TUTO/demos
@@ -75,39 +65,12 @@ $ export TUTO=$(pwd)
 {: .callout}
 
 
-### Singularity: a container engine for HPC
-
-As of June 2021 (**update!**), Singularity is now two distinct projects:
-* [Singularity](https://singularity.hpcng.org), maintained by [HPCng](https://hpcng.org) on their [GitHub](https://github.com/hpcng/singularity);
-* [SingularityCE](https://sylabs.io/singularity), maintained by [Sylabs](https://sylabs.io) on their [GitHub](https://github.com/sylabs/singularity).
-
-These two variants are equivalent up until version 3.7.4, released on May 2021.  This tutorial was developed with Singularity 3.5.x, therefore both variants can be used for the hands-on.
-
-Singularity was designed from scratch as a container engine for HPC applications, which is clearly reflected in some of its main features:
-
-* *unprivileged* runtime: Singularity containers do not require the user to hold root privileges to run (the Singularity executable needs to be installed and owned by *root*, though);
-
-* *integration*, rather than *isolation*, by default: same user as host, same shell variables inherited by host, current directory bind mounted, communication ports available; as a result, launching a container requires a much simpler syntax than Docker;
-
-* interface with job schedulers, such as *Slurm* or *PBS*;
-
-* ability to run MPI enabled containers using host libraries;
-
-* native execution of GPU enabled containers;
-
-* unfortunately, *root* privileges are required to build container images: users can build images on their personal laptops or workstations, on the cloud, or via a Remote Build service.
-
-This tutorial assumes Singularity version 3.0 or higher.  Version **3.5.0 or higher** is recommended as it offers a smoother, more bug-free experience.
-
-
 ### Executing a simple command in a Singularity container
 
 For these first exercises, we're going to use a plain *Ubuntu* container image.  It's small and quick to download, and will allow use to get to know how containers work by using common Linux commands.  
 
-Within the tutorial directory, let us cd into `demos/singularity`:
-
 ```
-$ cd $TUTO/demos/singularity
+$ cd $TUTO
 ```
 {: .bash}
 
@@ -169,7 +132,7 @@ Here we are also experiencing image caching in action: the output has no more me
 
 ### Executing a command in a Docker container
 
-Interestingly, Singularity is able to download and run Docker images as well.  
+Singularity is able to download and run Docker images as well.  
 Let's try and download a Ubuntu container from the [**Docker Hub**](https://hub.docker.com), *i.e.* the main registry for Docker containers:
 
 ```
@@ -381,15 +344,7 @@ If we really wanted to wipe the cache, we would need to use the `-f` flag instea
 
 ### Popular registries (*aka* image libraries)
 
-At the time of writing, **Docker Hub** hosts a much wider selection of container images than **Sylabs Cloud**.  This includes Linux distributions, Python and R deployments, as well as a big variety of applications.
-
-Bioinformaticians should keep in mind another container registry, [Red Hat Quay](https://quay.io) by Red Hat, that hosts thousands of applications in this domain of science.  These mostly come out of the [BioContainers](https://biocontainers.pro) project, that aims to provide automated container builds of all of the packages made available through [Bioconda](https://bioconda.github.io).
-
-Nvidia maintains the [Nvidia GPU Cloud (NGC)](https://ngc.nvidia.com), hosting an increasing number of containerised applications optimised to run on Nvidia GPUs.
-
-AMD has recently created [AMD Infinity Hub](https://www.amd.com/en/technologies/infinity-hub), to host containerised applications optimised for AMD GPUs.
-
-Right now, the Sylabs Cloud Library does not contain a large number of images.  Still, it can turn useful for storing container images requiring features that are specific to Singularity (we will see some in the next episodes).
+Bioinformaticians should keep in mind the container registry [Red Hat Quay](https://quay.io) by Red Hat, that hosts thousands of applications in this domain of science.  These mostly come out of the [BioContainers](https://biocontainers.pro) project, that aims to provide automated container builds of all of the packages made available through [Bioconda](https://bioconda.github.io).
 
 
 > ## Pull and run a Python container ##
