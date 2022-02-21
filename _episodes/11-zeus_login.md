@@ -33,8 +33,6 @@ There are some materials for the lessons which are hosted on github. In order to
 ```bash
 cd $MYSCRATCH
 git clone https://github.com/SarahBeecroft/intermediateHPC.git
-cd intermediateHPC
-ls
-cd exercises
+cd intermediateHPC/exercises
 ls
 ```
