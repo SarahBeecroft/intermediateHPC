@@ -36,7 +36,7 @@ cd $TUTO/intro_singularity
 > > ```
 > > {: .bash}
 > >
-> > This pull process will take at least one hour. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
+> > This pull process will take at least 10-20 minutes. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
 > >
 > {: .solution}
 {: .challenge}
