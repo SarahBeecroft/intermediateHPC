@@ -1,6 +1,6 @@
 ---
 title: "Using BLAST from a container"
-teaching: 0
+teaching: 5
 exercises: 20
 questions:
 objectives:

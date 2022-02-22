@@ -1,5 +1,5 @@
 ---
-title: "Reproducible scientific workflows"
+title: "Intro to Nextflow"
 teaching: 5
 exercises: 10
 questions:
@@ -23,8 +23,6 @@ Now, let's try and use Singularity and Nextflow to run a demo RNA sequencing pip
 
 First, if it's not already on your system, you'll need to install Nextflow.  You'll need to install a Java runtime and download the Nextflow executable. It will take a few minutes to download all of the required dependencies, but the process is fairly automated.  This is a template install [script]({{ page.root }}/files/install-nextflow.sh) for a Linux box.
 
-If you're running on the Pawsey Nimbus cloud, just run the above script via: `bash $TUTO/files/install-nextflow.sh`.
-
 If you're running at Pawsey *e.g.* on Zeus, all you need is to `module load nextflow`.
 
 
@@ -33,7 +31,7 @@ If you're running at Pawsey *e.g.* on Zeus, all you need is to `module load next
 Let's `cd` into the appropriate directory:
 
 ```
-cd intermediateHPC/exercises/nextflow
+cd $TUTO/nextflow
 ```
 {: .bash}
 
