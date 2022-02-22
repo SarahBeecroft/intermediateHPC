@@ -21,7 +21,7 @@ This example is adapted from the [BioContainers documentation](http://biocontain
 Before you start, `cd` into the appropriate directory:
 
 ```bash
-cd intermediateHPC/exercises/blast_singularity
+cd $TUTO/blast_singularity
 ```
 
 
@@ -36,10 +36,10 @@ cd intermediateHPC/exercises/blast_singularity
 > > * Go to https://quay.io (NO registration required!);
 > > * Locate the *EXPLORE* button on the top of the page, click on it, then in the search field type `blast`;
 > > * We want an image from `biocontainers`, so look for `biocontainers/blast` and click on it;
-> > * Click on the *Tags* icon on the left, and scroll the list of images to look for the highest Blast version, at the time of writing, it's (`2.10.1`; among the multiple tags for this version, identify the most recent one;
-> > * At the time of writing, the resulting image tag will be `2.10.1--pl526he19e7b1_2`;
+> > * Click on the *Tags* icon on the left, and scroll the list of images to look for the highest Blast version, at the time of writing, it's (`2.12.0`; among the multiple tags for this version, identify the most recent one;
+> > * At the time of writing, the resulting image tag will be `2.12.0--h3289130_3`;
 > > * You can click on the *Fetch* icon at the rightmost side of the record, select *Pull by Tag*, and then copy the full image name in your clipboard.
-> > * At the time of writing, the full image specification is then `quay.io/biocontainers/blast:2.10.1--pl526he19e7b1_2`.
+> > * At the time of writing, the full image specification is then `quay.io/biocontainers/blast:2.12.0--h3289130_3`.
 > {: .solution}
 {: .challenge}
 

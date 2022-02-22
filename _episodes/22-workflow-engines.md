@@ -33,7 +33,7 @@ If you're running at Pawsey *e.g.* on Zeus, all you need is to `module load next
 Let's `cd` into the appropriate directory:
 
 ```
-$ cd intermediateHPC/exercises/nextflow
+cd intermediateHPC/exercises/nextflow
 ```
 {: .bash}
 
@@ -42,7 +42,7 @@ For convenience, the content of the pipeline [RNAseq-NF](https://github.com/next
 It's time to launch the pipeline with Nextflow:
 
 ```
-$ nextflow run main.nf -profile singularity
+nextflow run main.nf -profile singularity
 ```
 {: .bash}
 
