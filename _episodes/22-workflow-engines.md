@@ -32,6 +32,8 @@ Let's `cd` into the appropriate directory:
 
 ```
 cd $TUTO/nextflow
+module load singularity
+module load nextflow
 ```
 {: .bash}
 

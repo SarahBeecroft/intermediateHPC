@@ -1,5 +1,5 @@
 ---
-title: "Share files with the host: BLAST, a bioinformatics demo"
+title: "Share files with the host"
 teaching: 5
 exercises: 15
 questions:
