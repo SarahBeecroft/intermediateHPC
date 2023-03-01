@@ -27,7 +27,8 @@ ls /
 {: .bash}
 
 ```
-askapbuffer  bin   dev  group  lib    media  opt     proc  run   scratch  srv  tempddn  usr  xcatpost astro boot  etc  home   lib64  mnt    pawsey  root  sbin  selinux  sys  tmp      var
+bin   cray  etc   image  lib64 mnt  proc  run	scratch  software  swap  tmp  var
+boot  dev   home  lib	 localscratch  opt  root  sbin	selinux  srv	   sys	 usr
 ```
 {: .output}
 
