@@ -1,5 +1,5 @@
 ---
-title: "Logging on to Zeus"
+title: "Logging on to Setonix"
 teaching: 5
 exercises: 10
 questions:
