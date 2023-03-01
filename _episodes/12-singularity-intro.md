@@ -44,11 +44,11 @@ cd $TUTO/intro_singularity
 
 > ## Are you running on a shared HPC system?
 >
-> If you're running this tutorial on a shared system (*e.g.* on Zeus or Magnus at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
+> If you're running this tutorial on a shared system (*e.g.* on Setonix at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
 >
 > ```
 > salloc -n 1 -t 4:00:00
-> module load singularity
+> module load singularity/3.8.6-nompi
 > ```
 > {: .bash}
 >
