@@ -5,6 +5,6 @@
 #SBATCH --time=02:00:00
 
 # executing a dummy command just to cause images to be downloaded in the cache
-module load singularity 
+module load singularity/3.8.6-nompi
 time singularity exec docker://quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4 echo ciao
 time singularity exec docker://nextflow/rnaseq-nf:latest echo ciao
