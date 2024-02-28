@@ -48,7 +48,7 @@ cd $TUTO/intro_singularity
 >
 > ```
 > salloc -n 1 -t 4:00:00
-> module load singularity/3.8.6-nompi
+> module load singularity/3.11.4-slurm
 > ```
 > {: .bash}
 >
