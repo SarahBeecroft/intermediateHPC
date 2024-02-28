@@ -44,10 +44,10 @@ cd $TUTO/intro_singularity
 
 > ## Are you running on a shared HPC system?
 >
-> If you're running this tutorial on a shared system (*e.g.* on Setonix at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Zeus with Slurm:
+> If you're running this tutorial on a shared system (*e.g.* on Setonix at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Setonix with Slurm:
 >
 > ```
-> salloc -n 1 -t 4:00:00
+> salloc -n 1 -t 4:00:00 --reservation=UWAbioinformatics --account=courses01
 > module load singularity/3.11.4-slurm
 > ```
 > {: .bash}
