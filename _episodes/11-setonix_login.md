@@ -9,7 +9,7 @@ keypoints:
 - Logging on to Pawsey systems uses SSH (secure shell)
 ---
 
-### Logging on to Zeus
+### Logging on to Setonix
 Your user name and password will be supplied. Within a terminal window, type:
 
 ```bash
