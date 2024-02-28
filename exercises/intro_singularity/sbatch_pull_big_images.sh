@@ -3,6 +3,8 @@
 #SBATCH --job-name=pull_images
 #SBATCH --ntasks=1
 #SBATCH --time=02:00:00
+#SBATCH --reservation=UWAbioinformatics
+#SBATCH --account=courses01
 
 # executing a dummy command just to cause images to be downloaded in the cache
 module load singularity/3.11.4-slurm
