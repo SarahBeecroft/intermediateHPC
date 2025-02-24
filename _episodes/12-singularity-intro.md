@@ -21,6 +21,7 @@ keypoints:
 We will `cd` into the directory for this part of the tutorial.
 
 ```
+mkdir intro_singularity
 cd intro_singularity
 ```
 {: .bash}
