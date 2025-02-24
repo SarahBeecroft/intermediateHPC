@@ -45,71 +45,9 @@ cd intro_singularity
 > {: .output}
 {: .callout}
 
-
-### Executing a simple command in a Singularity container
-
-For these first exercises, we're going to use a plain *Ubuntu* container image.  It's small and quick to download, and will allow use to get to know how containers work by using common Linux commands.  
-
-Running a command is done by means of `singularity exec`:
-
-```
-singularity exec library://ubuntu:16.04 cat /etc/os-release
-```
-{: .bash}
-
-```
-INFO:    Downloading library image
-
-NAME="Ubuntu"
-VERSION="16.04.5 LTS (Xenial Xerus)"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.5 LTS"
-VERSION_ID="16.04"
-HOME_URL="http://www.ubuntu.com/"
-SUPPORT_URL="http://help.ubuntu.com/"
-BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
-```
-{: .output}
-
-Here is what Singularity has just done:
-
-* downloaded a Ubuntu image from the Cloud Library (this would be skipped if the image had been downloaded previously);
-* stored it into the default cache directory;
-* instantiated a container from that image;
-* executed the command `cat /etc/os-release`.
-
-Container images have a **name** and a **tag**, in this case `ubuntu` and `16.04`.  The tag can be omitted, in which case Singularity will default to a tag named `latest`.
-
-
-> ## Using the *latest* tag
->
-> The practice of using the `latest` tag can be handy for quick typing, but is dangerous when it comes to reproducibility of your workflow, as under the hood the *latest* tag could point to different images over time.
-{: .callout}
-
-
-Here Singularity pulled the image from an online image registry, as represented in this example by the prefix `library://`, that corresponds to the [**Sylabs Cloud Library**](https://cloud.sylabs.io).  Images in there are organised as: `<user>/<project>/<name>:<tag>`.  
-In the example above we didn't specify the **user**, `library`, and the **project**, `default`.  Why?  Because the specific case of `library/default/` can be omitted.  The full specification is used in the next example:
-
-```
-singularity exec library://library/default/ubuntu:16.04 echo "Hello World"
-```
-{: .bash}
-
-```
-INFO:    Using cached image
-Hello World
-```
-{: .output}
-
-Here we are also experiencing image caching in action: the output has no more mention of the image being downloaded.
-
-
 ### Executing a command in a Docker container
 
-Singularity is able to download and run Docker images as well.  
+Singularity is able to download and run Docker images.  
 Let's try and download a Ubuntu container from the [**Docker Hub**](https://hub.docker.com), *i.e.* the main registry for Docker containers:
 
 ```
@@ -158,27 +96,6 @@ Rather than just downloading a SIF file, now there's more work for Singularity, 
 Note that, to point Singularity to Docker Hub, the prefix `docker://` is required.
 
 Docker Hub organises images only by users (also called *repositories*), not by projects: `<repository>/<name>:<tag>`.  In the case of the Ubuntu image, the repository was `library` and could be omitted.
-
-
-
-### Open up an interactive shell
-
-Sometimes it can be useful to open a shell inside a container, rather than to execute commands, *e.g.* to inspect its contents.
-
-Achieve this by using `singularity shell`:
-
-```
-singularity shell docker://ubuntu:16.04
-```
-{: .bash}
-
-```
-Singularity> 
-```
-{: .output}
-
-Remember to type `exit`, or hit `Ctrl-D`, when you're done!
-
 
 ### Download and use images via SIF file names
 
@@ -238,6 +155,29 @@ Hello Again
 ```
 {: .output}
 
+
+> ## Using the *latest* tag
+>
+> The practice of using the `latest` tag can be handy for quick typing, but is dangerous when it comes to reproducibility of your workflow, as under the hood the *latest* tag could point to different images over time.
+{: .callout}
+
+### Open up an interactive shell
+
+Sometimes it can be useful to open a shell inside a container, rather than to execute commands, *e.g.* to inspect its contents.
+
+Achieve this by using `singularity shell`:
+
+```
+singularity shell docker://ubuntu:16.04
+```
+{: .bash}
+
+```
+Singularity> 
+```
+{: .output}
+
+Remember to type `exit`, or hit `Ctrl-D`, when you're done!
 
 > ## Contextual help on Singularity commands
 >
