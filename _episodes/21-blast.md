@@ -21,83 +21,45 @@ This example is adapted from the [BioContainers documentation](http://biocontain
 Before you start, `cd` into the appropriate directory:
 
 ```bash
-cd $TUTO/blast_singularity
+cd ../blast_singularity
 ```
 
+## Pull the container image for BLAST
+ 
+To this end let's use the appropriate `singularity` command
+## Solution
 
-> ## Search for a BLAST container image in a registry
-> 
-> Today you're using the web registry **RedHat Quay**, at [https://quay.io](https://quay.io), to search the image we need.  This registry contains all the images provided by the **BioContainers** project, so there are good chances of finding what you need here.  The BioContainers home page, [https://biocontainers.pro](https://biocontainers.pro), also has a search function, however its user interface is a bit less friendly right now.
-> 
-> Now try and find the *most recent* container image for BLAST by BioContainers, using the Quay web site.
-> 
-> > ## Solution
-> > 
-> > * Go to https://quay.io (NO registration required!);
-> > * Locate the *EXPLORE* button on the top of the page, click on it, then in the search field type `blast`;
-> > * We want an image from `biocontainers`, so look for `biocontainers/blast` and click on it;
-> > * Click on the *Tags* icon on the left, and scroll the list of images to look for the highest Blast version, at the time of writing, it's (`2.12.0`; among the multiple tags for this version, identify the most recent one;
-> > * At the time of writing, the resulting image tag will be `2.12.0--h3289130_3`;
-> > * You can click on the *Fetch* icon at the rightmost side of the record, select *Pull by Tag*, and then copy the full image name in your clipboard.
-> > * At the time of writing, the full image specification is then `quay.io/biocontainers/blast:2.12.0--h3289130_3`.
-> {: .solution}
-{: .challenge}
+```bash
+singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4
+```
 
+At the end an image SIF file for BLAST is downloaded:
 
-> ## IMPORTANT: which image to use for the next steps?
-> 
-> As we don't continuously update the content of this tutorial, please use the following image for the rest of this BLAST example:
-> 
-> `quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4`
->
-> We've pre-cached this image in the virtual machine for this tutorial, so the following pull process should only take a few seconds.
-{: .callout}
+```bash
+ls blast*
+```
 
+```output
+blast_2.9.0--pl526h3066fca_4.sif
+```
 
-> ## Pull the container image for BLAST
-> 
-> To this end let's use the appropriate `singularity` command.
-> 
-> > ## Solution
-> > 
-> > ```bash
-> > singularity pull docker://quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4
-> > ```
-> > 
-> > At the end an image SIF file for BLAST is downloaded:
-> > 
-> > ```bash
-> > ls blast*
-> > ```
-> > 
-> > ```output
-> > blast_2.9.0--pl526h3066fca_4.sif
-> > ```
-> {: .solution}
-{: .challenge}
+## Run a test command
 
+Now run a simple command using the image you just pulled, for instance `blastp -help`, to verify that it actually works.
 
-> ## Run a test command
->
-> Now run a simple command using the image you just pulled, for instance `blastp -help`, to verify that it actually works.
->
-> > ## Solution
-> >
-> > ```bash
-> > singularity exec blast_2.9.0--pl526h3066fca_4.sif blastp -help
-> > ```
-> >
-> > ```output
-> > USAGE
-> >   blastp [-h] [-help] [-import_search_strategy filename]
-> >
-> > [..]
-> >
-> >  -use_sw_tback
-> >    Compute locally optimal Smith-Waterman alignments?
-> > ```
-> {: .solution}
-{: .challenge}
+ ```bash
+ singularity exec blast_2.9.0--pl526h3066fca_4.sif blastp -help
+ ```
+
+ ```output
+ USAGE
+   blastp [-h] [-help] [-import_search_strategy filename]
+
+ [..]
+
+  -use_sw_tback
+    Compute locally optimal Smith-Waterman alignments?
+ ```
 
 
 The demo directory `exercises/blast_singularity` contains a human prion FASTA sequence, `P04156.fasta`, as well as a gzipped reference database to blast against, `zebrafish.1.protein.faa.gz`.  Let us uncompress the database first:
@@ -106,55 +68,49 @@ The demo directory `exercises/blast_singularity` contains a human prion FASTA se
 gunzip zebrafish.1.protein.faa.gz
 ```
 
+ ## Prepare the database
 
-> ## Prepare the database
->
-> You now need to prepare the zebrafish database with `makeblastdb` for the search, using the following command through a container:
->
-> ```bash
-> makeblastdb -in zebrafish.1.protein.faa -dbtype prot
-> ```
->
-> Try and run it via Singularity.
->
-> > ## Solution
-> >
-> > ```bash
-> > singularity exec blast_2.9.0--pl526h3066fca_4.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
-> > ```
-> > ```output
-> > Building a new DB, current time: 11/16/2019 19:14:43
-> > New DB name:   /data/bio-intro-containers/exercises/blast_1/zebrafish.1.protein.faa
-> > New DB title:  zebrafish.1.protein.faa
-> > Sequence type: Protein
-> > Keep Linkouts: T
-> > Keep MBits: T
-> > Maximum file size: 1000000000B
-> > Adding sequences from FASTA; added 52951 sequences in 1.34541 seconds.
-> > ```
-> {: .solution}
-{: .challenge}
+ You now need to prepare the zebrafish database with `makeblastdb` for the search, using the following command through a container:
+
+ ```bash
+ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+ ```
+
+ Try and run it via Singularity.
+
+ ## Solution
+
+ ```bash
+ singularity exec blast_2.9.0--pl526h3066fca_4.sif makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+ ```
+ ```output
+ Building a new DB, current time: 11/16/2019 19:14:43
+ New DB name:   /data/bio-intro-containers/exercises/blast_1/zebrafish.1.protein.faa
+ New DB title:  zebrafish.1.protein.faa
+ Sequence type: Protein
+ Keep Linkouts: T
+ Keep MBits: T
+ Maximum file size: 1000000000B
+ Adding sequences from FASTA; added 52951 sequences in 1.34541 seconds.
+ ```
 
 
 After the container has terminated, you should see several new files in the current directory (try `ls`).  
 Now let's proceed to the final alignment step using `blastp`. 
 
 
-> ## Run the alignment
->
-> Adapt the following command to run into the container:
->
-> ```bash
-> blastp -query P04156.fasta -db zebrafish.1.protein.faa -out results.txt
-> ```
->
-> > ## Solution
-> >
-> > ```bash
-> > singularity exec blast_2.9.0--pl526h3066fca_4.sif blastp -query P04156.fasta -db zebrafish.1.protein.faa -out results.txt
-> > ```
-> {: .solution}
-{: .challenge}
+
+ ## Run the alignment
+  Adapt the following command to run into the container:
+  ```bash
+  blastp -query P04156.fasta -db zebrafish.1.protein.faa -out results.txt
+  ```
+
+ ## Solution
+
+ ```bash
+ singularity exec blast_2.9.0--pl526h3066fca_4.sif blastp -query P04156.fasta -db zebrafish.1.protein.faa -out results.txt
+ ```
 
 The final results are stored in `results.txt`:
 
