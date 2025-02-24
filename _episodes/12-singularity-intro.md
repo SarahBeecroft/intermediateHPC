@@ -88,14 +88,7 @@ UBUNTU_CODENAME=xenial
 ```
 {: .output}
 
-Rather than just downloading a SIF file, now there's more work for Singularity, as it has to both:
-
-* download the various layers making up the image, and
-* assemble them into a single SIF image file.
-
-Note that, to point Singularity to Docker Hub, the prefix `docker://` is required.
-
-Docker Hub organises images only by users (also called *repositories*), not by projects: `<repository>/<name>:<tag>`.  In the case of the Ubuntu image, the repository was `library` and could be omitted.
+Note that the prefix `docker://` is required to point Singularity to Docker Hub.
 
 ### Download and use images via SIF file names
 
@@ -142,11 +135,11 @@ singularity pull --dir sif_lib docker://library/ubuntu:16.04
 ```
 {: .bash}
 
-Being able to specify download locations allows you to keep the local set of images organised and tidy, by making use of a directory tree.  It also allows for easy sharing of images within your team in a shared resource.  In general, you will need to specify the location of the image upon execution, *e.g.* by defining a dedicated variable:
+Being able to specify download locations allows you to keep the local set of images organised and tidy, by making use of a directory tree. It also allows for easy sharing of images within your team in a shared resource.  In general, you will need to specify the location of the image upon execution, *e.g.* by defining a dedicated variable:
 
 ```
-export image="sif_lib/ubuntu_16.04.sif"
-singularity exec $image echo "Hello Again"
+export CONTAINER="sif_lib/ubuntu_16.04.sif"
+singularity exec $CONTAINER echo "Hello Again"
 ```
 {: .bash}
 
