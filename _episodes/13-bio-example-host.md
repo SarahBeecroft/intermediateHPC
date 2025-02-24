@@ -26,7 +26,6 @@ bin  boot  dev  etc  home  lib  lib64  mnt  opt  pe  proc  root  run  sbin  scra
 
 ```
 
-
 Now let's look at the root directory when we're in the container
 
 ```bash
@@ -45,7 +44,7 @@ pwd
 ```
 
 ```output
-/scratch/courses/cou001/intermediateHPC/exercises
+/scratch/courses/cou001/intermediateHPC/exercises/intro_singularity
 ```
 
 Now let's inspect the container.  (**Hint**: you need to run `pwd` in the container)
@@ -73,7 +72,7 @@ singularity exec docker://ubuntu:16.04 touch /example
 touch: cannot touch '/example': Read-only file system
 ```
 
-To summarise what we've learnt in the previous examples, we may say that a container ships an application and its dependencies by encapsulating them in an isolated, read-only filesystem.  In order for a container to access directories from the host filesystem (and write files), one needs to explicitly bind mount them.  The main exception here is the current work directory, which is bind mounted by default.
+To summarise: a container ships an application and its dependencies by encapsulating them in an isolated, read-only filesystem.  In order for a container to access directories from the host filesystem (and write files), one needs to explicitly bind mount them.  The main exception here is the current work directory, which is bind mounted by default.
 
 
 ### Bind mounting host directories
@@ -83,7 +82,7 @@ Singularity has the runtime flag `--bind`, `-B` in short, to mount host director
 There is a long syntax, which allows to map the host dir onto a container dir with a different name/path, `-B hostdir:containerdir`.  
 There is also a short syntax, that just mounts the dir using the same name and path: `-B hostdir`.
 
-Let's use the latter syntax to mount `$TUTO` into the container and re-run `ls`.
+Let's use the latter syntax to mount a directory into the container and re-run `ls`.
 
 ```
 singularity exec -B $MYSCRATCH/intermediateHPC/_episodes docker://ubuntu:16.04 ls $MYSCRATCH/intermediateHPC/_episodes
