@@ -21,25 +21,9 @@ keypoints:
 We will `cd` into the directory for this part of the tutorial.
 
 ```
-cd $TUTO/intro_singularity
+cd intro_singularity
 ```
 {: .bash}
-
-
-> ## Want to save time later in the tutorial?
->
-> > ## Read this
-> > Open a second terminal in the machine where you're running the tutorial then run the following commands to start downloading a few images that you'll require later:
-> >
-> > ```
-> > sbatch ./sbatch_pull_big_images.sh
-> > ```
-> > {: .bash}
-> >
-> > This pull process will take at least 10-20 minutes. Meanwhile, you'll be able to keep on going with this episode in your main terminal window.
-> >
-> {: .solution}
-{: .challenge}
 
 
 > ## Are you running on a shared HPC system?
@@ -47,8 +31,9 @@ cd $TUTO/intro_singularity
 > If you're running this tutorial on a shared system (*e.g.* on Setonix at Pawsey), you should use one of the compute nodes rather than the login node.  You can get this setup by using an interactive scheduler allocation, for instance on Setonix with Slurm:
 >
 > ```
-> salloc -n 1 -t 4:00:00 --reservation=UWAbioinformatics --account=courses01
-> module load singularity/3.11.4-slurm
+> salloc -n 1 -t 4:00:00 --account=courses01
+> module avail singularity
+> module load singularity/xxx
 > ```
 > {: .bash}
 >
@@ -175,29 +160,6 @@ Note that, to point Singularity to Docker Hub, the prefix `docker://` is require
 Docker Hub organises images only by users (also called *repositories*), not by projects: `<repository>/<name>:<tag>`.  In the case of the Ubuntu image, the repository was `library` and could be omitted.
 
 
-> ## What is the *latest* Ubuntu image from Docker Hub?
->
-> Write down a Singularity command that prints the OS version through the *latest* Ubuntu image from Docker Hub.
->
-> > ## Solution
-> >
-> > ```
-> > singularity exec docker://ubuntu cat /etc/os-release
-> > ```
-> > {: .bash}
-> >
-> > ```
-> > [..]
-> > NAME="Ubuntu"
-> > VERSION="20.04 LTS (Focal Fossa)"
-> > [..]
-> > ```
-> > {: .output}
-> >
-> > It's version 20.04.
-> {: .solution}
-{: .challenge}
-
 
 ### Open up an interactive shell
 
@@ -275,57 +237,6 @@ singularity exec $image echo "Hello Again"
 Hello Again
 ```
 {: .output}
-
-
-### Manage the image cache
-
-When pulling images, Singularity stores images and blobs in a cache directory.
-
-The default directory location for the image cache is `$HOME/.singularity/cache`.  This location can be inconvenient in shared resources such as HPC centres, where often the disk quota for the home directory is limited.  You can redefine the path to the cache dir by setting the variable `SINGULARITY_CACHEDIR`.
-
-If you are running out of disk space, you can inspect the cache with this command (omit `-v` before Singularity version 3.4):
-
-```
-singularity cache list -v
-```
-{: .bash}
-
-```
-NAME                     DATE CREATED           SIZE             TYPE
-ubuntu_latest.sif        2020-06-03 05:48:16    28.11 MB         library
-ubuntu_16.04.sif         2020-06-03 05:47:25    37.04 MB         library
-ubuntu_16.04.sif         2020-06-03 05:48:50    37.08 MB         oci
-53e3366ec435596bed2563   2020-06-03 05:48:39    0.17 kB          blob
-8a8a00d36ef8c18c877a5d   2020-06-03 05:48:41    0.81 kB          blob
-9387a5fd608d7a23de5064   2020-06-03 05:48:41    2.48 kB          blob
-b9fd7cb1ff8f489cf08278   2020-06-03 05:48:37    0.53 kB          blob
-e92ed755c008afc1863a61   2020-06-03 05:48:36    44.25 MB         blob
-ee690f2d57a128744cf4c5   2020-06-03 05:48:38    0.85 kB          blob
-
-There are 3 container file(s) using 102.24 MB and 6 oci blob file(s) using 44.25 MB of space
-Total space used: 146.49 MB
-```
-{: .output}
-
-we are not going to clean the cache in this tutorial, as cached images will turn out useful later on.  Let us just perform a dry-run using the `-n` option:
-
-```
-singularity cache clean -n
-```
-{: .bash}
-
-```
-User requested a dry run. Not actually deleting any data!
-Removing /home/ubuntu/.singularity/cache/library
-Removing /home/ubuntu/.singularity/cache/oci-tmp
-Removing /home/ubuntu/.singularity/cache/shub
-Removing /home/ubuntu/.singularity/cache/oci
-Removing /home/ubuntu/.singularity/cache/net
-Removing /home/ubuntu/.singularity/cache/oras
-```
-{: .output}
-
-If we really wanted to wipe the cache, we would need to use the `-f` flag instead (or, before Singularity version 3.4, the `-a` flag).
 
 
 > ## Contextual help on Singularity commands
